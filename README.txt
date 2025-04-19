@@ -1,0 +1,14 @@
+Ashton Gallistel
+
+Patterns: Just like with the previous version of this program, the only pattern I really implemented was the state pattern, due to nearly all information about an object's state being contained within that object. There were exceptions to this, mostly being calls for collision being done mostly in main rather than in their respective objects. I discuss this a bit more in the postmortem below.
+
+Postmortem: I'm honestly not very proud of how this project turned out. I got a good headstart back during the first section we worked on it, but I ended up not making much more progress until Friday, where I got stuck trying to solve a bug for several hours. (Said bug was due to me calling a function with .function() instead of :function(), which I didn't even realize until 8:30 PM.) This resulted in me having very little time to complete the other parts of the assignment. While I'm happy with how much I got done in the time period, there's still a ton missing. The main things are the deck and draw piles, which have locations, but no cards within them, as I lacked a check for seeing when you clicked on a deck specifically rather than a card within the deck. There's also how the cards are added to the stacks, as I didn't have time to add true shuffling, resulting in most reds being near the bottom of the stacks. I also didn't bugtest as thoroughly as I would have liked to, so it's possible that there's many bugs I missed.
+
+Regarding patterns, my low time limit mentioned above resulted in me not having time to consider implementing any new patterns, whether from scratch or via modifying old code, as I had to focus on making sure critical functions worked instead. I'm unsure what patterns I even could add. The best one I can think of would be the flyweight pattern, since all cards and stacks use the same size and shape.
+
+Overall, I'd definitely make sure to stay ahead rather than over-relying on any headstart I may have. Had I been more vigilant, I could have noticed the bug sooner and asked during class or office hours, giving me more time to implement all I wanted.
+
+On the plus side, I'm happy with how the functional stacks and cards turned out, given how quickly they were made. They seem to function very well, and I'm proud of how I managed to get the stacks' card placement to be different for tableau and suit, as well as how tableau looks when multiple cards are attached. I'm also somewhat proud of the idea to use text symbols so as to avoid having to find/make assets, even if it's a touch hard to read and was just to save time.
+
+Credits:
+All assets were made by me using text.
