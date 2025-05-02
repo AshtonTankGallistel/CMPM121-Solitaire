@@ -4,6 +4,13 @@ require "card"
 
 StackClass = {}
 
+CARD_SUIT_NAME = {
+  "Spades",
+  "Clubs",
+  "Hearts",
+  "Diamonds"
+}
+
 function StackClass:new(xPos, yPos, stackType, bonus)
   local stack = {}
   local metadata = {__index = StackClass}
@@ -12,7 +19,7 @@ function StackClass:new(xPos, yPos, stackType, bonus)
   stack.position = Vector(xPos, yPos)
   stack.size = Vector(50, 70)
   stack.heldCards = {}
-  print(stack.heldCards)
+  --print(stack.heldCards)
   
   --type of stack; affects rules for updating locations and pulling cards
   stack.type = stackType
@@ -29,7 +36,7 @@ function StackClass:draw()
   --love.graphics.print(tostring(#self.heldCards), self.position.x +20, self.position.y -20)
   if self.bonus ~= nil then
     love.graphics.setColor(0.5,0.5,0.5,0.9)
-    love.graphics.print(self.bonus, self.position.x, self.position.y -20)
+    love.graphics.print(CARD_SUIT_NAME[self.bonus], self.position.x, self.position.y -20)
   end
   
 end
@@ -82,7 +89,7 @@ function StackClass:updateLocations()
     distance = distance + distanceChange
   end
   --if top card is flipped, un-flip it
-  print(#self.heldCards)
+  --print(#self.heldCards)
   if self.type ~= "deck" then
     if #self.heldCards > 0 and self.heldCards[#self.heldCards].flipped then
       self.heldCards[#self.heldCards].flipped = false
@@ -97,7 +104,7 @@ function StackClass:topCard()
 end
 
 function StackClass:cardPulled()
-  print("bah")
+  --print("bah")
   table.remove(self.heldCards,#self.heldCards)
   self:updateLocations()
 end

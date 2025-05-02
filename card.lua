@@ -9,6 +9,20 @@ CARD_STATE = {
   GRABBED = 2
 }
 
+CARD_SUIT = {
+  SPADES = 1,
+  CLUBS = 2,
+  HEARTS = 3,
+  DIAMONDS = 4
+}
+
+--Suit_Display = {
+--  1 = nil,
+--  2 = nil,
+--  3 = nil,
+--  4 = nil
+--}
+
 function CardClass:new(xPos, yPos, s, num, flipped)
   local card = {}
   local metadata = {__index = CardClass}
@@ -20,17 +34,18 @@ function CardClass:new(xPos, yPos, s, num, flipped)
   if flipped == nil then card.flipped = false else card.flipped = flipped end
   
   card.suit = s
-  if s == "Spades" then 
-    card.suitSym = "<3<"
+  print(CARD_SUIT.SPADES)
+  if s == CARD_SUIT.SPADES then 
+    card.suitSym = "<3<♠"
     card.color = "b"
-  elseif s == "Clubs" then 
-    card.suitSym = ">3o"
+  elseif s == CARD_SUIT.CLUBS then 
+    card.suitSym = "c3<♣"
     card.color = "b"
-  elseif s == "Hearts" then 
-    card.suitSym = "<3"
+  elseif s == CARD_SUIT.HEARTS then 
+    card.suitSym = "3>♥"
     card.color = "r"
-  elseif s == "Diamonds" then 
-    card.suitSym = "<>"
+  elseif s == CARD_SUIT.DIAMONDS then 
+    card.suitSym = "<>♦"
     card.color = "r"
   end
   card.value = num
@@ -63,17 +78,22 @@ function CardClass:update(grabber)
 end
 
 function CardClass:draw()
+  local red = {1,0,0,1}
+  local black = {0,0,0,1}
+  local white = {1,1,1,1}
   
+  
+  --love.graphics.setColor(white and self.flipped or red)
   if not self.flipped then
-    love.graphics.setColor(1,1,1,1)
+    love.graphics.setColor(white)
   else
-    love.graphics.setColor(1,0,0,1)
+    love.graphics.setColor(red)
   end
   love.graphics.rectangle("fill",self.position.x,self.position.y, 
     self.size.x, self.size.y, 6, 6)
   
   --love.graphics.print(tostring(self.state), self.position.x +20, self.position.y -20)
-  if self.color == "r" then love.graphics.setColor(1,0,0,1) else love.graphics.setColor(0,0,0,1) end
+  if self.color == "r" then love.graphics.setColor(red) else love.graphics.setColor(black) end
   if not self.flipped then love.graphics.print(tostring(self.suitSym .." ".. self.value), self.position.x, self.position.y) end
 end
 

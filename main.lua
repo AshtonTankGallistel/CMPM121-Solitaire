@@ -15,9 +15,8 @@ function love.load()
   cardTable = {}
   grabbedCard = nil
   
-  --table.insert(cardTable, CardClass:new(100,100,"Spades",1))
-  --table.insert(cardTable, CardClass:new(150,100,"Hearts",4))
-  for _, suit in ipairs({"Spades","Clubs","Hearts","Diamonds"}) do
+  
+  for _, suit in ipairs({CARD_SUIT.SPADES,CARD_SUIT.CLUBS,CARD_SUIT.HEARTS,CARD_SUIT.DIAMONDS}) do
     for val = 1, 13 do
       table.insert(cardTable, CardClass:new(100,100,suit,val,true))
     end
@@ -39,10 +38,10 @@ function love.load()
   table.insert(stackTable, StackClass:new(650,100, "tableau"))
   table.insert(stackTable, StackClass:new(750,100, "tableau"))
   --Suit Piles
-  table.insert(stackTable, StackClass:new(875,100, "suit", "Spades"))
-  table.insert(stackTable, StackClass:new(875,200, "suit", "Clubs"))
-  table.insert(stackTable, StackClass:new(875,300, "suit", "Hearts"))
-  table.insert(stackTable, StackClass:new(875,400, "suit", "Diamonds"))
+  table.insert(stackTable, StackClass:new(875,100, "suit", CARD_SUIT.SPADES))
+  table.insert(stackTable, StackClass:new(875,200, "suit", CARD_SUIT.CLUBS))
+  table.insert(stackTable, StackClass:new(875,300, "suit", CARD_SUIT.HEARTS))
+  table.insert(stackTable, StackClass:new(875,400, "suit", CARD_SUIT.DIAMONDS))
   
   math.randomseed(os.time())
   for _, card in ipairs(cardTable) do
@@ -103,7 +102,7 @@ function checkForMouseMoving()
     if card.state == CARD_STATE.MOUSE_OVER then
       if grabber.grabPos ~= nil and not card.flipped then -- if left clicked, grab the card
         --check if inside stack (if it is, we can't pick it up)
-        print(card.myStack)
+        --print(card.myStack)
         if card.myStack == nil or card.myStack:topCard() == card then
           card.state = CARD_STATE.GRABBED
           grabbedCard = card
